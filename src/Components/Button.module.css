@@ -1,0 +1,14 @@
+.btn {
+  margin-top: 1rem;
+  color: white;
+  background-color: rgb(141, 94, 228);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  transition: background-color 0.2s, padding 0.2s;
+}
+
+.btn:hover {
+  background-color: rgb(160, 124, 226);
+  padding: 1rem;
+  border-radius: 2rem;
+}

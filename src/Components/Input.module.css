@@ -1,0 +1,22 @@
+.input {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 40rem;
+  text-align: center;
+  /* width: 90%; */
+}
+.input label {
+  /* text-align: center; */
+  display: block;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.input input {
+  display: block;
+  /* font: inherit; */
+  /* text-align: center; */
+  width: 100%;
+  padding: 0.15rem;
+  border: 1px solid #ccc;
+}

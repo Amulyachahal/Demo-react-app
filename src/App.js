@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import Input from "./Components/Input";
+import OutputList from "./Components/OutputList";
 
+// const data = [
+//   { name: "Mark", age: 23 },
+//   { name: "Katherina", age: 28 },
+// ];
 function App() {
+  const [state, setState] = useState([
+    { name: "Mark", age: 23 },
+    { name: "Katherina", age: 28 },
+  ]);
+  // const [message, setMessage] = useState("");
+  const inputHandler = (name, age) => {
+    const enteredData = { name: name, age: age };
+    setState((previousData) => {
+      const updatedData = [...previousData, enteredData];
+      // console.log(updatedData);
+      return updatedData;
+    });
+    // console.log(state);
+    // return data;
+    // return [...data]
+    // console.log("in App js", name, age);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Input onInputChange={inputHandler} />
+      <OutputList items={state} />
     </div>
   );
 }
