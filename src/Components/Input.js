@@ -1,48 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Card from "./Card";
 import styles from "./Input.module.css";
 import Button from "./Button";
 import ErrorModal from "./ErrorModal";
 
 const Input = (props) => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
   const [error, setError] = useState();
 
-  const nameChangeHandler = (event) => {
-    setName(event.target.value);
-
-    // props.onInputChange(name);
-  };
-  const ageChangeHandler = (event) => {
-    setAge(event.target.value);
-    // props.onInputChange(age);
-  };
-
   const submitHandler = (event) => {
+    const userName = nameInputRef.current.value;
+    const userAge = ageInputRef.current.value;
     event.preventDefault();
-    if (name.trim().length === 0 || age.trim().length === 0) {
+    if (userName.trim().length === 0 || userAge.trim().length === 0) {
       setError({
         title: "Invalid input",
         message: "Please enter a valid name and age (non empty values)",
       });
       return;
     }
-    if (+age < 1) {
+    if (+userAge < 1) {
       setError({
         title: "Invalid age",
         message: "Please enter a valid age (i.e. > 0)",
       });
       return;
     }
-    props.onInputChange(name, age);
-    setName("");
-    setAge("");
+    props.onInputChange(userName, userAge);
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
 
   const errorHandler = () => {
     setError(null);
   };
+
+  //   const [name, setName] = useState("");
+  //   const [age, setAge] = useState("");
+
+  //   const nameChangeHandler = (event) => {
+  //     setName(event.target.value);
+
+  //     // props.onInputChange(name);
+  //   };
+  //   const ageChangeHandler = (event) => {
+  //     setAge(event.target.value);
+  //     // props.onInputChange(age);
+  //   };
   return (
     <div>
       {error && (
@@ -55,19 +60,9 @@ const Input = (props) => {
       <Card className={styles.input}>
         <form onSubmit={submitHandler}>
           <label htmlFor="inputName">Enter your name</label>
-          <input
-            id="inputName"
-            type="text"
-            value={name}
-            onChange={nameChangeHandler}
-          />
+          <input id="inputName" type="text" ref={nameInputRef} />
           <label htmlFor="inputAge">Enter your age (Years)</label>
-          <input
-            id="inputAge"
-            type="number"
-            value={age}
-            onChange={ageChangeHandler}
-          />
+          <input id="inputAge" type="number" ref={ageInputRef} />
           <Button type="submit">Submit</Button>
         </form>
       </Card>

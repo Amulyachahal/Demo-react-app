@@ -4,6 +4,7 @@
   background-color: rgb(141, 94, 228);
   border-radius: 1rem;
   padding: 0.5rem;
+  cursor: pointer;
   transition: background-color 0.2s, padding 0.2s;
 }
 
